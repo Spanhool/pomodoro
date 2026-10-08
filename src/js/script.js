@@ -1,6 +1,5 @@
 const start = document.getElementById("start");
 const reset = document.getElementById("reset");
-const cronometro = document.getElementsByClassName("timer");
 const minutos = document.getElementById("minutes");
 const minutosEmSegundos = Number(minutos.textContent) * 60;
 const segundos = document.getElementById("seconds");
@@ -19,14 +18,28 @@ function atualizarCronometro() {
 }
 
 function iniciarCronometro() {
-  if (intervalo != null) {
+  if (intervalo !== null || tempoRestante <= 0) {
     return;
   }
 
   intervalo = setInterval(() => {
     tempoRestante--;
     atualizarCronometro();
+
+    if (tempoRestante === 0) {
+      clearInterval(intervalo);
+      intervalo = null;
+      alert("Pomodoro Finalizado");
+    }
   }, 1000);
 }
 
+function resetarCronometro() {
+  clearInterval(intervalo);
+  intervalo = null;
+  tempoRestante = minutosEmSegundos;
+  atualizarCronometro();
+}
+
 start.addEventListener("click", iniciarCronometro);
+reset.addEventListener("click", resetarCronometro);
