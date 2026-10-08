@@ -12,9 +12,6 @@ function atualizarCronometro() {
 
   minutos.textContent = String(minutosRestantes).padStart(2, "0");
   segundos.textContent = String(segundosRestantes).padStart(2, "0");
-
-  console.log(minutosRestantes);
-  console.log(segundosRestantes);
 }
 
 function iniciarCronometro() {
